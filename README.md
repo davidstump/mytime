@@ -1,6 +1,6 @@
-# Mytime
+# MyTime
 
-TODO: Write a gem description
+Use your git commit history to track your time. Uses Freshbooks API.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+  To list log:
+
+  $ timesheet
+
+  To submit project time:
+
+  $ timesheet commit -m "Add an additional note if desired"
 
 ## Contributing
 
