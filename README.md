@@ -20,11 +20,11 @@ Or install it yourself as:
 
   To list log:
 
-  $ timesheet
+    $ timesheet
 
   To submit project time:
 
-  $ timesheet commit -m "Add an additional note if desired"
+    $ timesheet commit -m "Add an additional note if desired"
 
 ## Contributing
 
