@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+#
+# = mytime(1)
+#
+# == USAGE
+#  mytime add/manage timesheeds with git commit log. Uses Freshbooks API.
+#
+# == INSTALL
+# RubyGem:
+#     gem install mytime
+#
+
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'mytime.rb'))
+
+Mytime.execute(*ARGV)
