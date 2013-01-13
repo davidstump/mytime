@@ -25,7 +25,7 @@ module Mytime
       when :init
         puts "We have all the time in the world."
         init
-      when :status, :list, :log, :s
+      when :status, :list, :log
         status
       when :commit, :add, :a
         commit(args.first)

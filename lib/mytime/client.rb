@@ -21,12 +21,12 @@ module Mytime
     def validate(entry)
       return "Oops. Please try resubmitting your time or checking accout details!" unless entry.any?
       if entry["time_entry_id"]
-        return "Timesheet Submitted"
+        return "Timesheet Successfully Submitted"
       else
         return "Oops. An error was encountered: #{entry}"
       end
     end
-    
+
   end
 
 end

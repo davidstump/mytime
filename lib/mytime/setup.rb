@@ -20,8 +20,10 @@ module Mytime
       opts.banner = "\nUsage: mytime [options] [command]"
       opts.separator "mytime uses git to log your time\n\n"
       opts.separator "Commands:"
-      opts.separator "  list      Prints all items"
-      opts.separator "  init      Bootstraps tacos in this directory"
+      opts.separator "  status    Prints formatted commit log from today"
+      opts.separator "  init      Sets up mytime for this project"
+      opts.separator "  commit    Creates a custom timesheet entry"
+      opts.separator "  push      Saves timesheet entry with git commit log"
       opts.separator ""
       opts.separator "Options:"
       opts.on('-h', '--help', 'Display this screen') { puts opts; exit }
