@@ -23,8 +23,10 @@ module Mytime
       when :init
         puts "We have all the time in the world."
         init
+      when :status
+        status
       when :commit
-        puts "What a good time!"
+        puts "Submitting Timesheet..."
         commit(args.first)
       else
         puts @options
