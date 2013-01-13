@@ -28,10 +28,10 @@ module Mytime
     project = Client.project(project_id)["project"]
     task_id = project["tasks"]["task"][0]["task_id"]
 
-    project_details = Hash.new
-    project_details["project_path"] = Dir.pwd
-    project_details["project_id"] = project_id
-    project_details["task_id"] = task_id
+    project_details = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
+    project_details[project_id]["project_path"] = Dir.pwd
+    project_details[project_id]["project_id"] = project_id
+    project_details[project_id]["task_id"] = task_id
     self.add(project_details)
   end
 
