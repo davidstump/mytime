@@ -23,11 +23,13 @@ module Mytime
       when :init
         puts "We have all the time in the world."
         init
-      when :status
+      when :status, :list, :log, :s
         status
-      when :commit
-        puts "Submitting Timesheet..."
+      when :commit, :add, :a
         commit(args.first)
+      when :push, :submit, :p 
+        puts "Submitting Timesheet..."
+        push(args.first)
       else
         puts @options
       end
