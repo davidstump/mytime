@@ -11,17 +11,21 @@ module Mytime
   # Send a custom time entry to API with string message
   #
   # Option:
-  #   message: Optional custom message to send with time entry
+  #   hours: Required - number of hours for this time entry
+  #   message: Optional - custom message to send with time entry
   #
-  def commit(message = "")
+  def commit(hours, message = "")
     puts "Submitting: #{message}"
-    puts Client.submit(message)
+    puts Client.submit(hours, message)
   end
 
   # Send git commit log as timesheet entry to client
   #
-  def push
-    puts Client.submit(status)
+  # Options
+  #   hours: Required parameter for number of hours on time entry
+  #
+  def push(hours)
+    puts Client.submit(hours, status)
   end
 
 end
