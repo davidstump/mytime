@@ -1,5 +1,6 @@
 require "mytime/version"
 require "mytime/setup"
+require "mytime/client"
 require "mytime/timesheet"
 require 'ruby-freshbooks'
 require 'optparse'
@@ -9,6 +10,7 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 module Mytime
     extend self
+    extend Mytime::Client
 
     USER_FILE = File.expand_path('~/.mytime')
 
@@ -29,7 +31,7 @@ module Mytime
         commit(args.first)
       when :push, :submit, :p 
         puts "Submitting Timesheet..."
-        push(args.first)
+        push
       else
         puts @options
       end
