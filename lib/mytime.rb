@@ -22,31 +22,55 @@ module Mytime
       command = args.shift || 'list'
 
       case command.to_sym
-      when :init
+      when :setup
         puts "We have all the time in the world."
+        setup
+      when :init
         init
       when :status, :list, :log
-        status
+        puts status
       when :commit, :add, :a
         commit(args.first)
       when :push, :submit, :p 
         puts "Submitting Timesheet..."
         push
+      when :project, :detail, :info
+        puts "Project Details:"
+        puts config_details.to_yaml
       else
         puts @options
       end
     end
 
+    # Save a .mytime config file. Overwrites any existing data
+    # 
+    # Options:
+    #   contents: Required hash of account data to save
+    #
     def save(contents)
-      File.open(USER_FILE, 'w') do |file|
+      File.open(USER_FILE, 'a') do |file|
         file.write contents.to_yaml
       end
     end
 
-    def get_account_details
-      return unless YAML.load_file(USER_FILE)
-      YAML.load_file(USER_FILE).each do |key, texts|
-        return key
+    # Add yaml data to the existing .mytime config file
+    #
+    # Options:
+    #   contents: Required hash of data to add to config file
+    #
+    def add(contents)
+      data = YAML.load_file USER_FILE
+      merged_data = data.merge(contents)
+      puts merged_data
+      File.open(USER_FILE, 'w') do |file|
+        file.write merged_data.to_yaml
       end
+    end
+
+    # Return details of .mytime config file
+    #
+    def config_details
+      return unless YAML.load_file(USER_FILE)
+      data = YAML.load_file USER_FILE
     end
 end
