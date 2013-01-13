@@ -30,13 +30,13 @@ module Mytime
       when :status, :list, :log
         puts status
       when :commit, :add, :a
-        commit(args.first)
+        commit(args.first, args.last)
       when :push, :submit, :p 
         puts "Submitting Timesheet..."
-        push
+        push(args.first)
       when :project, :detail, :info
         puts "Project Details:"
-        puts config_details.to_yaml
+        puts config_details(Dir.pwd).to_yaml
       else
         puts @options
       end
@@ -69,8 +69,17 @@ module Mytime
 
     # Return details of .mytime config file
     #
-    def config_details
+    def config_details(path = "")
       return unless YAML.load_file(USER_FILE)
       data = YAML.load_file USER_FILE
+      if path == ""
+        data
+      else
+        data.each do |d|
+          project = data.select{|key, hash| hash["project_path"] == path }
+          return project.first[1]
+        end
+      end
     end
+
 end
