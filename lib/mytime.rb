@@ -37,6 +37,8 @@ module Mytime
       when :project, :detail, :info
         puts "Project Details:"
         puts config_details(Dir.pwd).to_yaml
+      when :debug
+        puts init?
       else
         puts @options
       end
@@ -77,9 +79,24 @@ module Mytime
       else
         data.each do |d|
           project = data.select{|key, hash| hash["project_path"] == path }
-          return project.first[1]
+          return project.first[1] if project.any?
         end
       end
+    end
+
+    # Check if mytime is setup
+    def setup?
+      config_details.has_key?("account")
+    end
+
+    # Check if mytime is initialized for this project
+    def init?
+      config_details(Dir.pwd).has_key?("project_id")
+    end
+
+    def finish_setup
+      return puts "Please run `mytime setup` connect your account." unless setup?
+      return puts "Please run `'mytime init` to setup this project directory" unless init?
     end
 
 end
