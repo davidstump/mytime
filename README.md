@@ -18,13 +18,31 @@ Or install it yourself as:
 
 ## Usage
 
+  To link to your Freshbooks account (you will need your Freshbooks username and API token):
+  
+    $ mytime setup
+
+  To initialize mytime in a project directory:
+  
+    $ mytime init
+
+  To see project details:
+  
+    $ mytime project
+
   To list log:
 
-    $ mytime
+    $ mytime status
 
-  To submit project time:
+  To submit custom time entry:
 
-    $ mytime commit "Add an additional note if desired"
+    $ mytime commit [hrs] [custom_message]
+    $ mytime commit  1.5 "Add an additional note if desired"
+
+  To push your git logs from today for a given project:
+  
+    $ mytime push [hrs] [optional_message]
+    $ mytime push 4.5 "Insert slot A into slot B"
 
 ## Contributing
 
