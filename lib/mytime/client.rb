@@ -9,7 +9,7 @@ module Mytime
     #   project_id: Optional project_id to restrict data returned
     #
     def project(project_id = nil)
-      account = Mytime.config_details    
+      account = Config.details    
       c = FreshBooks::Client.new(account["account"], account["token"])
       if project_id.nil?
         c.project.list["projects"]
@@ -25,9 +25,9 @@ module Mytime
     #   message: Optional - message to send with time entry
     #
     def submit(hours, message = "")
-      account = Mytime.config_details
+      account = Config.details
       c = FreshBooks::Client.new(account["account"], account["token"])
-      project = Mytime.config_details(Dir.pwd)
+      project = Config.details(Dir.pwd)
       entry = c.time_entry.create(
         :time_entry => {
           project_id: project["project_id"],

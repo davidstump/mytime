@@ -1,5 +1,6 @@
 require "mytime/version"
 require "mytime/setup"
+require "mytime/config"
 require "mytime/client"
 require "mytime/timesheet"
 require 'ruby-freshbooks'
@@ -36,7 +37,7 @@ module Mytime
         push(args.first)
       when :project, :detail, :info
         puts "Project Details:"
-        puts config_details(Dir.pwd).to_yaml
+        puts Config.details(Dir.pwd).to_yaml
       when :debug
         puts init?
       else
@@ -44,57 +45,14 @@ module Mytime
       end
     end
 
-    # Save a .mytime config file. Overwrites any existing data
-    # 
-    # Options:
-    #   contents: Required hash of account data to save
-    #
-    def save(contents)
-      File.open(USER_FILE, 'a') do |file|
-        file.write contents.to_yaml
-      end
-    end
-
-    # Add yaml data to the existing .mytime config file
-    #
-    # Options:
-    #   contents: Required hash of data to add to config file
-    #
-    def add(contents)
-      data = YAML.load_file USER_FILE
-      merged_data = data.merge(contents)
-      puts merged_data
-      File.open(USER_FILE, 'w') do |file|
-        file.write merged_data.to_yaml
-      end
-    end
-
-    # Return details of .mytime config file
-    #
-    def config_details(path = "")
-      begin
-        data = YAML.load_file USER_FILE
-        if path == ""
-          data
-        else
-          data.each do |d|
-            project = data.select{|key, hash| hash["project_path"] == path }
-            return project.first[1] if project.any?
-          end
-        end
-      rescue Exception => e
-        {}
-      end
-    end
-
     # Check if mytime is setup
     def setup?
-      config_details.has_key?("account")
+      Config.details.has_key?("account")
     end
 
     # Check if mytime is initialized for this project
     def init?
-      config_details(Dir.pwd).has_key?("project_id")
+      Config.details(Dir.pwd).has_key?("project_id")
     end
 
     def finish_setup

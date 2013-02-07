@@ -12,7 +12,7 @@ module Mytime
     account = Hash.new
     account["account"] = "#{account_name}.freshbooks.com"
     account["token"] = token
-    self.save(account)
+    Config.save(account)
   end
 
   # Setup .mytime file to include project specific data
@@ -32,7 +32,7 @@ module Mytime
     project_details[project_id]["project_path"] = Dir.pwd
     project_details[project_id]["project_id"] = project_id
     project_details[project_id]["task_id"] = task_id
-    self.add(project_details)
+    Config.add(project_details)
   end
 
   # Set configuration variables to values passed in the command line options
