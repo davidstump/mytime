@@ -72,15 +72,18 @@ module Mytime
     # Return details of .mytime config file
     #
     def config_details(path = "")
-      return unless YAML.load_file(USER_FILE)
-      data = YAML.load_file USER_FILE
-      if path == ""
-        data
-      else
-        data.each do |d|
-          project = data.select{|key, hash| hash["project_path"] == path }
-          return project.first[1] if project.any?
+      begin
+        data = YAML.load_file USER_FILE
+        if path == ""
+          data
+        else
+          data.each do |d|
+            project = data.select{|key, hash| hash["project_path"] == path }
+            return project.first[1] if project.any?
+          end
         end
+      rescue Exception => e
+        {}
       end
     end
 
