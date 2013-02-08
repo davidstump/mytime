@@ -41,8 +41,8 @@ Or install it yourself as:
 
   To push your git logs from today for a given project:
   
-    $ mytime push [hrs] [optional_message]
-    $ mytime push 4.5 "Insert slot A into slot B"
+    $ mytime push [hrs]
+    $ mytime push 4.5
 
 ## Contributing
 
