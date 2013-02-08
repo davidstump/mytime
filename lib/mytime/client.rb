@@ -18,6 +18,16 @@ module Mytime
       end
     end
 
+    # Get task data from client API
+    #
+    # project_id: Required project_id to restrict data returned
+    #
+    def tasks(project_id)
+      account = Config.details    
+      c = FreshBooks::Client.new(account["account"], account["token"])
+      c.task.list :project_id => project_id
+    end
+
     # Submit new time entry to client API
     #
     # Option:

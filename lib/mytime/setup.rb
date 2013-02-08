@@ -25,8 +25,12 @@ module Mytime
     end
     project_id = STDIN.gets.chomp
 
-    project = Client.project(project_id)["project"]
-    task_id = project["tasks"]["task"][0]["task_id"]
+    puts "Choose Task"
+    tasks = Client.tasks(project_id)['tasks']['task']
+    tasks.each do |task|
+      puts "#{task['task_id']}: #{task['name']}"
+    end
+    task_id = STDIN.gets.chomp
 
     project_details = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc)}
     project_details[project_id]["project_path"] = Dir.pwd
