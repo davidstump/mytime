@@ -28,6 +28,10 @@ module Mytime
   #
   def push(hours)
     return finish_setup unless setup? && init?
+    if hours.nil?
+      puts "How many hours did you spend on these commits?"
+      hours = STDIN.gets.chomp
+    end
     puts Client.submit(hours, status)
   end
 
