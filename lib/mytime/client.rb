@@ -35,6 +35,7 @@ module Mytime
     #   message: Optional - message to send with time entry
     #
     def submit(hours, message = "")
+
       account = Config.details
       c = FreshBooks::Client.new(account["account"], account["token"])
       project = Config.details(Dir.pwd)
@@ -43,7 +44,7 @@ module Mytime
           project_id: project["project_id"],
           task_id: project["task_id"],
           hours: hours.to_f,
-          notes: message.to_s,
+          notes: message.gsub(/\n/,"\n\n").to_s,
           date: Date.today.to_s
         }
       )
